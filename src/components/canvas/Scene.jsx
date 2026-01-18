@@ -2,13 +2,13 @@ import { Canvas } from '@react-three/fiber';
 import { ScrollControls, Stars, PerspectiveCamera } from '@react-three/drei';
 import { Suspense } from 'react';
 import { ScrollManager } from './ScrollManager';
+import { CameraRig } from './CameraRig';
 import { Hero } from '../sections/Hero';
 import { About } from '../sections/About';
 import { Skills } from '../sections/Skills';
 import { Projects } from '../sections/Projects';
 import { Contact } from '../sections/Contact';
-import { CameraRig } from './CameraRig';
-
+import { ShootingStars } from './ShootingStars';
 import { Services } from '../sections/Services';
 
 export const Scene = () => {
@@ -27,6 +27,7 @@ export const Scene = () => {
             <pointLight position={[10, 10, 10]} intensity={1} />
 
             <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+            <ShootingStars />
 
             <Suspense fallback={null}>
                 <ScrollControls pages={NUM_PAGES} damping={0.2}>

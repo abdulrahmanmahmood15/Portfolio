@@ -3,7 +3,6 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useState, useRef } from 'react';
 import * as THREE from 'three';
 import { useStore } from '../../store/useStore';
-import { useAudio } from '../../context/AudioContext';
 
 const SkillItem = ({ text, position, color = "white" }) => {
     const [hovered, setHovered] = useState(false);

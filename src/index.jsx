@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { AudioProvider } from './context/AudioContext';
+import { ErrorBoundary } from './components/ui/ErrorBoundary';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AudioProvider>
+    <ErrorBoundary>
       <App />
-    </AudioProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );

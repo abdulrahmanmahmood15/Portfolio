@@ -1,4 +1,6 @@
 import { Scroll } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
+
 const SectionTitle = ({ children, ...props }) => (
     <h2 className="text-4xl font-bold mb-8 text-white" {...props}>
         {children}
@@ -17,56 +19,58 @@ const Card = ({ title, date, role, description, align = 'left' }) => {
 }
 
 export const About = () => {
+    const { height } = useThree((state) => state.viewport);
+
     return (
-        <Scroll html style={{ width: '100%', height: '100%' }}>
-            <div className="absolute top-[100vh] left-0 w-full min-h-screen px-4 md:px-20 flex flex-col items-center justify-start pt-20 pointer-events-auto">
-                <h2 className="text-4xl font-bold mb-8 text-white">About Me</h2>
+        <>
+            {/* 3D Background Element (optional, like Contact) */}
+            <Scroll>
+                <group position={[0, -height * 1, 0]}>
+                    <mesh position={[0, 0, -1]}>
+                        <planeGeometry args={[10, 8]} />
+                        <meshStandardMaterial color="#1e1b4b" transparent opacity={0.3} />
+                    </mesh>
+                </group>
+            </Scroll>
 
-                <div className="flex flex-col gap-20 w-full max-w-4xl relative">
-                    {/* Central Line */}
-                    <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-purple-900/50 transform -translate-x-1/2 rounded-full" />
+            {/* HTML Content Overlay */}
+            <Scroll html style={{ width: '100%', height: '100%' }}>
+                <div className="absolute top-[100vh] left-0 w-full h-[100vh] flex items-center justify-center pointer-events-auto">
+                    <div className="w-[90vw] md:w-[800px] space-y-8 bg-black/80 p-10 rounded-2xl border border-purple-500/50 backdrop-blur-xl text-white shadow-2xl">
+                        <SectionTitle>About Me</SectionTitle>
 
-                    {/* Timeline Items */}
-                    <div className="flex w-full relative">
-                        <div className="w-1/2 pr-10 text-right">
+                        <div className="space-y-6">
+                            <p className="text-gray-300 text-lg leading-relaxed">
+                                I'm a passionate MERN Stack Developer with a love for creating immersive web experiences
+                                and cutting-edge applications. My journey in web development has been driven by curiosity
+                                and a commitment to crafting solutions that blend functionality with aesthetic excellence.
+                            </p>
+
+                            <p className="text-gray-300 text-lg leading-relaxed">
+                                With expertise in React, Node.js, MongoDB, and modern web technologies, I specialize in
+                                building scalable applications and interactive 3D web experiences. I'm always exploring
+                                new technologies and pushing the boundaries of what's possible on the web.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
                             <Card
+                                title="Full Stack Development"
+                                date="2020 - Present"
+                                role="MERN Stack Developer"
+                                description="Building end-to-end web applications with React, Node.js, Express, and MongoDB. Creating scalable, maintainable codebases with modern best practices."
+                            />
+                            <Card
+                                title="3D Web Experiences"
+                                date="2022 - Present"
+                                role="Three.js Developer"
+                                description="Designing and implementing immersive 3D web experiences using React Three Fiber and Drei. Combining creativity with technical expertise."
                                 align="right"
-                                title="Senior Developer"
-                                role="Tech Corp"
-                                date="2023 - Present"
-                                description="Leading frontend teams and building scalable web applications using React and Node.js."
                             />
                         </div>
-                        <div className="absolute left-1/2 top-6 w-4 h-4 bg-purple-500 rounded-full transform -translate-x-1/2 shadow-[0_0_10px_#a855f7]" />
-                    </div>
-
-                    <div className="flex w-full relative">
-                        <div className="absolute left-1/2 top-6 w-4 h-4 bg-purple-500 rounded-full transform -translate-x-1/2 shadow-[0_0_10px_#a855f7]" />
-                        <div className="w-1/2 pl-10 ml-auto">
-                            <Card
-                                align="left"
-                                title="Full Stack Engineer"
-                                role="StartUp Inc"
-                                date="2021 - 2023"
-                                description="Developed full-stack features for a high-growth SaaS platform using the MERN stack."
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex w-full relative">
-                        <div className="w-1/2 pr-10 text-right">
-                            <Card
-                                align="right"
-                                title="Frontend Developer"
-                                role="Creative Agency"
-                                date="2019 - 2021"
-                                description="Built interactive websites and landing pages with a focus on animations and UX."
-                            />
-                        </div>
-                        <div className="absolute left-1/2 top-6 w-4 h-4 bg-purple-500 rounded-full transform -translate-x-1/2 shadow-[0_0_10px_#a855f7]" />
                     </div>
                 </div>
-            </div>
-        </Scroll>
+            </Scroll>
+        </>
     );
 };

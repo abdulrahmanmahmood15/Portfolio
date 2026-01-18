@@ -3,7 +3,6 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useState, useRef } from 'react';
 import * as THREE from 'three';
 import { useStore } from '../../store/useStore';
-import { useAudio } from '../../context/AudioContext';
 
 // Placeholder project data
 const projects = [
@@ -31,7 +30,6 @@ const ProjectCard = ({ project, position }) => {
     const ref = useRef();
     const [hovered, setHovered] = useState(false);
     const setCursorVariant = useStore((state) => state.setCursorVariant);
-    const { playHover } = useAudio();
 
     useFrame((state, delta) => {
         if (ref.current) {
@@ -52,7 +50,6 @@ const ProjectCard = ({ project, position }) => {
                 onPointerOver={() => {
                     setHovered(true);
                     setCursorVariant('text'); // Or a 'project' variant
-                    playHover();
                 }}
                 onPointerOut={() => {
                     setHovered(false);
