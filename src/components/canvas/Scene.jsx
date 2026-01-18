@@ -1,18 +1,18 @@
 import { Canvas } from '@react-three/fiber';
-import { ScrollControls, Stars, PerspectiveCamera } from '@react-three/drei';
+import { ScrollControls, Scroll, Stars, PerspectiveCamera } from '@react-three/drei';
 import { Suspense } from 'react';
 import { ScrollManager } from './ScrollManager';
 import { CameraRig } from './CameraRig';
 import { Hero } from '../sections/Hero';
-import { About } from '../sections/About';
+import { AboutSection, AboutBackground } from '../sections/About';
 import { Skills } from '../sections/Skills';
-import { Projects } from '../sections/Projects';
-import { Contact } from '../sections/Contact';
+import { ProjectsSection, ProjectsBackground } from '../sections/Projects';
+import { ContactSection, ContactBackground } from '../sections/Contact';
 import { ShootingStars } from './ShootingStars';
-import { Services } from '../sections/Services';
+import { ServicesSection, ServicesBackground } from '../sections/Services';
 
 export const Scene = () => {
-    const NUM_PAGES = 7; // Hero, About, Skills, Services, Projects, Contact
+    const NUM_PAGES = 8; // Hero, About, Skills, Services, Projects, Contact
 
     return (
         <Canvas>
@@ -33,18 +33,27 @@ export const Scene = () => {
                 <ScrollControls pages={NUM_PAGES} damping={0.2}>
                     <ScrollManager pages={NUM_PAGES} />
 
-                    {/* 
-            We can place 3D content here that needs to be affected by scroll.
-            Or we can use useScroll() inside the components themselves.
-          */}
+                    {/* 3D Content */}
                     <Hero />
-                    <About />
+                    <Scroll>
+                        <AboutBackground />
+                        <ServicesBackground />
+                        <ProjectsBackground />
+                        <ContactBackground />
+                    </Scroll>
                     <Skills />
-                    <Services />
-                    <Projects />
-                    <Contact />
 
-                    {/* Other sections will go here */}
+                    <Suspense fallback={null}>
+                        {/* Any other 3D components */}
+                    </Suspense>
+
+                    {/* Unified HTML Overlay */}
+                    <Scroll html style={{ width: '100%', height: '100%' }}>
+                        <AboutSection />
+                        <ServicesSection />
+                        <ProjectsSection />
+                        <ContactSection />
+                    </Scroll>
 
                 </ScrollControls>
             </Suspense>

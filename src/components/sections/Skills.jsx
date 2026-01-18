@@ -58,8 +58,8 @@ export const Skills = () => {
 
     return (
         <Scroll>
-            {/* Place at Page 2: y = -height * 2 */}
-            <group position={[0, -height * 2, 0]}>
+            {/* Place at Page 2.5: y = -height * 2.5 */}
+            <group position={[0, -height * 2.5, 0]}>
                 <Text position={[0, 4, 0]} fontSize={1.5} color="white" anchorX="center" anchorY="middle">
                     SKILLS
                 </Text>

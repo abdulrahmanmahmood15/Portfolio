@@ -2,7 +2,7 @@ import { Scroll } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
 
 const SectionTitle = ({ children, ...props }) => (
-    <h2 className="text-4xl font-bold mb-8 text-white" {...props}>
+    <h2 className="text-6xl font-bold mb-10 text-white" {...props}>
         {children}
     </h2>
 );
@@ -18,59 +18,71 @@ const Card = ({ title, date, role, description, align = 'left' }) => {
     )
 }
 
-export const About = () => {
+export const AboutBackground = () => {
     const { height } = useThree((state) => state.viewport);
-
     return (
-        <>
-            {/* 3D Background Element (optional, like Contact) */}
-            <Scroll>
-                <group position={[0, -height * 1, 0]}>
-                    <mesh position={[0, 0, -1]}>
-                        <planeGeometry args={[10, 8]} />
-                        <meshStandardMaterial color="#1e1b4b" transparent opacity={0.3} />
-                    </mesh>
-                </group>
-            </Scroll>
+        <group position={[0, -height * 1, 0]}>
+            <mesh position={[0, 0, -1]}>
+                <planeGeometry args={[10, 8]} />
+                <meshStandardMaterial color="#1e1b4b" transparent opacity={0.3} />
+            </mesh>
+        </group>
+    );
+};
 
-            {/* HTML Content Overlay */}
-            <Scroll html style={{ width: '100%', height: '100%' }}>
-                <div className="absolute top-[100vh] left-0 w-full h-[100vh] flex items-center justify-center pointer-events-auto">
-                    <div className="w-[90vw] md:w-[800px] space-y-8 bg-black/80 p-10 rounded-2xl border border-purple-500/50 backdrop-blur-xl text-white shadow-2xl">
-                        <SectionTitle>About Me</SectionTitle>
+export const AboutSection = () => {
+    return (
+        <div className="absolute top-[100vh] left-0 w-full h-[100vh] flex items-center justify-center pointer-events-auto">
+            <div className="w-full max-w-4xl relative">
+                <SectionTitle className="text-center mb-16">About Me</SectionTitle>
 
-                        <div className="space-y-6">
-                            <p className="text-gray-300 text-lg leading-relaxed">
-                                I'm a passionate MERN Stack Developer with a love for creating immersive web experiences
-                                and cutting-edge applications. My journey in web development has been driven by curiosity
-                                and a commitment to crafting solutions that blend functionality with aesthetic excellence.
-                            </p>
+                <div className="flex flex-col gap-20 w-full relative">
+                    {/* Central Line */}
+                    <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-purple-900/50 transform -translate-x-1/2 rounded-full" />
 
-                            <p className="text-gray-300 text-lg leading-relaxed">
-                                With expertise in React, Node.js, MongoDB, and modern web technologies, I specialize in
-                                building scalable applications and interactive 3D web experiences. I'm always exploring
-                                new technologies and pushing the boundaries of what's possible on the web.
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                    {/* Timeline Item 1 - Front-End Developer (PowerHouse) */}
+                    <div className="flex w-full relative">
+                        <div className="w-1/2 pr-10 text-right">
                             <Card
-                                title="Full Stack Development"
-                                date="2020 - Present"
-                                role="MERN Stack Developer"
-                                description="Building end-to-end web applications with React, Node.js, Express, and MongoDB. Creating scalable, maintainable codebases with modern best practices."
-                            />
-                            <Card
-                                title="3D Web Experiences"
-                                date="2022 - Present"
-                                role="Three.js Developer"
-                                description="Designing and implementing immersive 3D web experiences using React Three Fiber and Drei. Combining creativity with technical expertise."
                                 align="right"
+                                title="Front-End Developer"
+                                role="PowerHouse"
+                                date="Sep 2023 - Jun 2024"
+                                description="Software House"
+                            />
+                        </div>
+                        <div className="absolute left-1/2 top-6 w-4 h-4 bg-purple-500 rounded-full transform -translate-x-1/2 shadow-[0_0_10px_#a855f7]" />
+                    </div>
+
+                    {/* Timeline Item 2 - Front-End Developer (Triaxo) */}
+                    <div className="flex w-full relative">
+                        <div className="absolute left-1/2 top-6 w-4 h-4 bg-purple-500 rounded-full transform -translate-x-1/2 shadow-[0_0_10px_#a855f7]" />
+                        <div className="w-1/2 pl-10 ml-auto">
+                            <Card
+                                align="left"
+                                title="Front-End Developer"
+                                role="Triaxo Solutions"
+                                date="Sep 2022 - Present"
+                                description="Software House"
                             />
                         </div>
                     </div>
+
+                    {/* Timeline Item 3 - MERN Stack Developer (Triaxo) */}
+                    <div className="flex w-full relative">
+                        <div className="w-1/2 pr-10 text-right">
+                            <Card
+                                align="right"
+                                title="MERN Stack Developer"
+                                role="Triaxo Solutions"
+                                date="Sep 2023 - Present"
+                                description="Software House"
+                            />
+                        </div>
+                        <div className="absolute left-1/2 top-6 w-4 h-4 bg-purple-500 rounded-full transform -translate-x-1/2 shadow-[0_0_10px_#a855f7]" />
+                    </div>
                 </div>
-            </Scroll>
-        </>
+            </div>
+        </div>
     );
 };

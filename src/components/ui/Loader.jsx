@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../store/useStore';
 
 export const Loader = () => {
-    const { progress } = useProgress();
+    const { active, progress, errors, item, loaded, total } = useProgress();
     const started = useStore((state) => state.experienceStarted);
     const setStarted = useStore((state) => state.setExperienceStarted);
 
@@ -25,7 +25,7 @@ export const Loader = () => {
                     <div className="mt-4 text-purple-400 font-mono text-sm">
                         INITIALIZING WORLD... {Math.round(progress)}%
                     </div>
-                    {progress === 100 && (
+                    {(progress === 100 || (total === 0 && !active)) && (
                         <motion.button
                             className="mt-8 px-6 py-2 border border-purple-500 text-purple-500 rounded-full hover:bg-purple-500 hover:text-white transition-colors cursor-pointer"
                             initial={{ opacity: 0, y: 20 }}
